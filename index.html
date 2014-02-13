@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <title>From Traces To (Formal) Models - William Durand</title>
+        <link rel="stylesheet" href="css/reveal-no-icons.min.css">
+        <link rel="stylesheet" href="reveal.js/css/theme/serif.css" id="theme">
+        <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <script>
+            document.write('<link rel="stylesheet" href="reveal.js/css/print/' +
+                (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') +
+                '.css" type="text/css" media="print">'
+            );
+        </script>
+        <meta property="og:title" content="From Traces To (Formal) Models - William Durand">
+        <meta property="og:description" content="">
+        <meta property="og:image" content="">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1 class="title">From Traces To (Formal) Models</h1>
+                    <em>William Durand - February 13, 2014</em>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## About Me
+
+                            <br>
+
+                            * PhD student at Michelin / LIMOS
+                            * Graduated from IUT and ISIMA
+                            * I <i class="icon-heart"></i> Open Source
+
+                            <img src="images/clermontech.png" class="clermontech-badge" />
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## PhD Topic
+
+                            <br>
+                            Automated **Test** Generation for applications and production machines in a
+                            **Model-based Testing** approach.
+                        </script>
+                    </section>
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Agenda
+
+                        <br>
+
+                        * Introduction
+                        * Model-based Testing
+                        * Current Research
+                        * Conclusion
+                    </script>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Software Testing
+
+                            <p class="fragment">
+                                <br>
+                                **Software testing** is the process of **analyzing a software**
+                                <br>item **to detect the differences between existing and
+                                <br>required conditions** (that is, bugs) and to evaluate the
+                                <br>features of the software item.
+                            </p>
+
+                            <p class="fragment">
+                                <br>
+                                It is a **Verification** and **Validation** process.
+                            </p>
+
+                            <p class="fragment">
+                                <br>
+                                **Validation**&nbsp;&nbsp;&nbsp;&nbsp;&rarr; "Are we building the right software?"
+                                <br>
+                                <br>
+                                **Verification** &rarr; "Are we building the software right?"
+                            </p>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Why?
+
+                            <br>
+                            <ul>
+                                <li>To find **faults** (G. Myers, The Art of Software Testing)</li>
+                                <br>
+                                <li>To provide **confidence** of reliability, correctness,<br>and absence of particular faults</li>
+                            </ul>
+
+                            <br>
+                            <br>
+                            <i class="icon-warning-sign"></i> This does **not** mean that the software is completely
+                            free of defects. Rather, it must be good enough for its intended use.
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## How?
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Industry
+
+                            <br>
+                            **Unit** Testing, **Integration** Testing, **Functional** Testing, System Testing,
+                            Stress Testing, Performance Testing, Usability Testing, Acceptance Testing,
+                            Regression Testing, Beta Testing, &lt;Whatever You Want&gt; Testing
+
+                            <br><br>
+                            <p class="fragment left">
+                                <i class="icon-thumbs-up"></i> People now understand the need for testing things
+                            </p>
+                            <p class="fragment left">
+                                <i class="icon-thumbs-down"></i> They mostly do testing by hand...
+                            </p>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Academia
+
+                            <p class="fragment">
+                                <br>
+                                One approach is to...
+                                <br>
+                                ![](images/automate_all_the_things.jpeg)
+                            </p>
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Model-based Testing
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Definition
+
+                            <br>
+                            **Model-based Testing** (MbT) is **application of Model-based design** for designing and
+                            optionally also executing artifacts<br>**to perform software testing**.
+
+                            <br>
+                            **Models** can be used to represent the **desired behavior<br>of an SUT**, or to represent
+                            **testing strategies** and a **test environement**.
+
+                            <br>
+                            <small>
+                                <a href="http://en.wikipedia.org/wiki/Model-based_testing">http://en.wikipedia.org/wiki/Model-based_testing</a>
+                            </small>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Why?
+                            <br>
+
+                            * To bring the benefits of automation to new parts of the test cycle
+                              (test cases creation for instance)
+                            * To provide testers more effective tools
+                            * To reduce cost and cycle time
+                            * To leverage formal methods
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Models
+
+                            <br>
+                            A **Model** is a description of a system that helps you understand and predict its behavior.
+                            <br>
+                            <br>
+                            It does **not need to completely describe it** to be effective.
+
+                            <br>
+                            <br>
+                            <p class="left">
+                                **Behavior/Control oriented**: Finite Automata (FSM, LTS), Petri Nets,
+                                Synchronous Languages (Lustre, Scade)
+                                <br>
+                                <br>
+                                **Data oriented** (pre/post): JML, Spec#, OCL, B-Method, Praspel
+                            </p>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## The Big Picture
+
+                            ![](images/mbt.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Three Stages
+                            <br>
+
+                            1. Formally modelling the requirements (specification);
+                            2. Generating test cases from the model;
+                            3. Running these test cases against an actual SUT and evaluating the results.
+
+                            <br>
+                            <i class="icon-info-sign"></i> Combining 2. and 3. leads to **On-The-Fly Testing**.
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Test Generation
+
+                            <br>
+
+                            * Based on Finite State Machines
+                            * Based on Symbolic Transition Systems
+                            * Based on Labelled Transition Systems
+                        </script>
+                    </section>
+                    <section>
+                        <h2>Labelled Transition Systems</h2>
+                        <br>
+                        <p class="float-left">
+                            <img src="images/lts.png" />
+                        </p>
+                        <p class="float-right">
+                            <br>
+                            $$ L = (S, Act, \rightarrow) $$
+                            <br>
+                            with
+                            <br>
+                            $$ S = \lbrace s_{1}, s_{2}, s_{3}, s_{4} \rbrace $$
+                            <br>
+                            and
+                            <br>
+                            $$ Act = \lbrace COFFEE, TEA, BUTTON \rbrace $$
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Traces</h2>
+                        <p>
+                            <br>
+                            $$
+                            \begin{align}
+                            traces(s_{3}) =
+                            & \lbrace \\
+                            & BUTTON, \\
+                            & BUTTON \cdot TEA \cdot BUTTON, \\
+                            & \dots \rbrace = traces(s_{1}) = traces(s_{4}) \\
+                            \\
+                            traces(s_{2}) =
+                            & \lbrace \\
+                            & TEA, \\
+                            & COFFEE, \\
+                            & TEA \cdot BUTTON \cdot TEA, \\
+                            & \dots \rbrace
+                            \end{align}
+                            $$
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Input/Output LTS</h2>
+                        <br>
+                        <p class="float-left">
+                            <img src="images/iolts.png" />
+                        </p>
+                        <p class="float-right">
+                            <br>
+                            <br>
+                            <br>
+                            $$
+                            \begin{align}
+                            Act_{I} = & \lbrace BUTTON?, COFFEE?, TEA? \rbrace \\
+                            Act_{U} = & \lbrace COFFEE!, TEA! \rbrace
+                            \end{align}
+                            $$
+                        </p>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Automated Generation Of Specification Models
+
+                            <br>
+
+                            * By leveraging the API documentation
+                            * By **instrumenting** the code (tracing)
+                            * By leveraging the logs
+                            * By **monitoring** the system
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Current Research
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Challenge
+
+                            <br>
+                            Based on a software, running in a<br>production environment, would it possible to:
+                            <br>
+                            <br>
+
+                            1. extract a **knowledge base**
+                            2. that can be formalized by a **model**
+                            3. that can be used to **generate tests** and/or **specifications**?
+                        </script>
+                    </section>
+                    <section>
+                        <h2>Context (1/2)</h2>
+
+                        <br>
+                        <p>
+                            Michelin relies on a method close to the <strong>C</strong>omputer <strong>I</strong>ntegrated <strong>M</strong>anufacturing
+                            (CIM) approach to control its production:
+                        </p>
+
+                        <div class="float-left" style="width: 65%">
+                            <ul style="margin-top: 5%">
+                                <li>L4: Business Software</li>
+                                <li>L3: Virtual level as it is not that used (Factory Management)</li>
+                                <li><strong>L2: Supervision / Workshop Management</strong></li>
+                                <li>L1: Automata</li>
+                            </ul>
+                        </div>
+                        <div class="float-right" style="width: 60%">
+                            <img src="images/levels.png" />
+                        </div>
+
+                        <p>These levels can exchange data among them.</p>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Context (2/2)
+
+                            <br>
+                            Focus on **Level 2** applications but, then again,
+                            <br>there are a lot of differences between them, such as:
+
+                            * Programming Language
+                            * Framework
+                            * Design
+                            * Version
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Hypotheses
+
+                            <br>
+
+                            1. Applications deployed in production behave as expected
+                            2. Don't consider (existing) specifications
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## The Big Picture
+
+                            ![](images/autofunk_1.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Traces
+
+                            <br>
+                            A sequence of observable actions produced by an application.
+
+                            <br>
+                            **Raw** traces are collected from various sources,
+                            including the **production environment** thanks to a
+                            monitor.
+                            <br>
+                            <br>
+                            <em>
+                                <i class="icon-info-sign"></i> Traces in the context of web applications are HTTP requests and responses.
+                            </em>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Domain Expert
+
+                            <br>
+                            A (human) domain expert can deduce the meaning of an application
+                            execution by reading these **traces**.
+
+                            <p class="fragment">
+                                <br>
+                                <i class="icon-lightbulb"></i> What about doing the same, **programmatically**?
+                            </p>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Expert System
+
+                            <br>
+                            In Artificial Intelligence, an **expert system** is a computer system that
+                            **emulates the decision-making ability of a human expert**.
+                            <br>
+                            <br>
+                            Designed to **solve complex problems by reasoning about knowledge**, and **not** by
+                            following the procedure of a developer as is the case in conventional programming.
+                            <br>
+                            <br>
+                            <em>
+                                <i class="icon-info-sign"></i> Java [JBoss Drools Expert](https://www.jboss.org/drools/drools-expert.html)
+                                engine is a powerful expert system.
+                            </em>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Rules
+                            <br>
+
+                            First-Order Predicate Calculus
+
+                                IF condition
+                                THEN
+                                    action
+                                ENDIF
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 1 - Filtering
+
+                            <br>
+                            Cleans up the trace set given as input, removing **noise**,<br>a.k.a. **irrelevant** traces.
+                            <br>
+                            <br>
+                            The resulting structured trace set is given to the next layer.
+                            <br>
+                            <br>
+                            <em>
+                                <i class="icon-info-sign"></i> In the context of web applications, HTTP requests/responses
+                                related to assets (CSS files, JavaScript files, images) are meaningless.
+                            </em>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 2 - IOSTS Transformation
+
+                            <br>
+                            Based on a the previous **structured trace set**, this layer performs a IOSTS transformation,
+                            by **translating valued actions of a trace into IOSTS transitions**.
+                            <br>
+                            <br>
+                            This first model is re-generated each time new traces are received, and then passed to the next layer.
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 2 - Example
+
+                            ![](images/gh-2-1.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 2 - Minimisation
+                            <br>
+                            The previous IOSTS is reduced in term of location size by applying a bisimulation
+                            minimisation technique.
+                            <br>
+                            <br>
+
+                                GET("https://github.com/")
+                                GET("https://github.com/login")
+                                POST("https://github.com/session")
+                                GET("https://github.com/")
+                                GET("https://github.com/willdurand")
+                                GET("https://github.com/willdurand/Geocoder")
+                                POST("https://github.com/logout")
+                                GET("https://github.com/")
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 3 to N - Abstraction
+
+                            <br>
+                            Composed of rules that emulate the ability of a human expert to **simplify transitions**,
+                            to **analyze transition syntax** in order to deduce more meaningful information related to
+                            the targeted application, and to **construct more abstract models**.
+                            <br>
+                            <br>
+                            Each layer takes an **IOSTS given by the direct lower** one. It represents the current **base of facts**.
+                            <br>
+                            <br>
+                            Layer 3 contains low level, generic rules that can be reused against different applications.
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 3 - Example
+                            <br>
+
+                                rule "Identify Login Page"
+                                when
+                                    $t: Transition(
+                                        Action == GET,
+                                        Guard.response.content contains('login-form')
+                                    )
+                                then
+                                    modify ($t) { Assign.add("isLoginPage := true") }
+                                end
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 3 - Example
+
+                            <br>
+                            ![](images/gh-2-2.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 4 - Example
+
+                            <br>
+                            ![](images/gh-2-3.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Layer 5 - Example
+
+                            <br>
+                            ![](images/gh-2-4.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Framework
+
+                            ![](images/autofunk_2.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## The Explorer
+
+                            <br>
+                            **The more traces, the better model in term of expressiveness.**
+                            <br>
+                            <br>
+                            A **robot explorer** is used to **increase the amount of traces**<br>that are sent to the
+                            model generator (i.e. the component that embeds the Expert System).
+                            <br>
+                            <br>
+                            <i class="icon-warning-sign"></i> It can only be applied on event-driven applications.
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Strategies
+
+                            <br>
+                            Our **robot explorer** uses intelligent crawling guided by strategies, rather than blind
+                            exploration.
+                            <br>
+                            <br>
+                            Strategies are defined by **rules** that define how to find new states to visit. This is an
+                            **orthogonal layer**.
+                            <br>
+                            <br>
+                            <em>
+                                <i class="icon-info-sign"></i> BFS and DFS are common strategies to explore a web application.
+                            </em>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Recap'
+
+                            ![](images/se.png)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## **Auto**matic **Funk**tional Testing Tool
+
+                            <br>
+                            Written in Java, PHP, Node.JS, and JavaScript.
+
+                            <br>
+                            Distributed system thanks to RabbitMQ.
+
+                            <br>
+                            Service Oriented Architecture FTW!
+
+                            <br>
+                            <em>
+                                <i class="icon-warning-sign"></i> This tool has been built for web applications.
+                                <br>Michelin will get its own internal tool.
+                            </em>
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## So, What?
+                            <br>
+
+                            The **final model** gathers useful information which allow to:
+
+                            1. generate test cases;
+                            2. detect potential issues;
+                            3. perform security testing.
+                        </script>
+                    </section>
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Thank You.
+
+                        ### Questions?
+
+                        <br><br>
+                        <br><br>
+                        <ul class="me">
+                            <li>
+                                <i class="icon-globe"></i> <a href="http://williamdurand.fr" title="website">williamdurand.fr</a>
+                            </li>
+                            <li>
+                                <i class="icon-github"></i> <a href="https://github/willdurand" title="github">github.com/willdurand</a>
+                            </li>
+                            <li>
+                                <i class="icon-twitter"></i> <a href="https://twitter.com/couac" title="twitter">twitter.com/couac</a>
+                            </li>
+                        </ul>
+                    </script>
+                </section>
+            </div>
+        </div>
+        <script type="text/javascript" src="reveal.js/lib/js/head.min.js"></script>
+        <script type="text/javascript" src="reveal.js/js/reveal.min.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme,
+                transition: Reveal.getQueryHash().transition || 'concave',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'js/pageNumbers.js' },
+                    { src: 'reveal.js/plugin/math/math.js', async: true },
+                ]
+            });
+        </script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+                MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+                    cancel: ["Extension","cancel"],
+                    bcancel: ["Extension","cancel"],
+                    xcancel: ["Extension","cancel"],
+                    cancelto: ["Extension","cancel"]
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+.me {
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+.me li {
+    list-style-type: none;
+    text-align: left;
+}
+
+h1.title {
+    font-size: 280%;
+}
+
+.left,
+.left .MathJax_Display {
+    text-align: left !important;
+}
+
+.clermontech-badge {
+    position: absolute !important;
+    right: 0%;
+    width: 18%;
+    border: 0 !important;
+    box-shadow: none !important;
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+    transform: rotate(10deg);
+}
+
+.reveal .controls div.slide-number {
+    width: 25px;
+    left: 27px;
+    top: 33px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.5em;
+    font-weight: bold;
+    opacity: 0.5;
+}
+
+img.no-border {
+    border: 0 !important;
+    box-shadow: none !important;
+    background: none !important;
+}
+
+.float-left {
+    float: left;
+    width: 49%;
+}
+
+.float-right {
+    margin-left: 50% !important;
+    width: 49%;
+}
+
+.force-inline .MathJax_Display {
+    display: inline;
+}
+
+em {
+    font-style: italic !important;
+    font-size: 80% !important;
+}
